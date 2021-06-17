@@ -1,5 +1,5 @@
-import { fetchRequests } from "./dataAccess.js";
-import { ClownRental } from "ClownRental.js"
+import { fetchReservations } from "./dataAccess.js";
+import { ClownRental } from "./ClownRental.js"
 
 const mainContainer = document.querySelector("#container")
 
@@ -11,7 +11,7 @@ mainContainer.addEventListener(
 )
 
 const render = () => {
-    fetchRequests().then(
+    fetchReservations().then(
         () => {
             mainContainer.innerHTML = ClownRental()
         }

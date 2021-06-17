@@ -1,25 +1,25 @@
 const applicationState = {
-    requests: []
+    reservations: []
 }
 const API = "http://localhost:8088"
 
-export const fetchRequests = () => {
-    return fetch(`${API}/requests`)
+export const fetchReservations = () => {
+    return fetch(`${API}/reservations`)
     .then(response => response.json())
     .then(
         (clownReservation) => {
-            applicationState.requests = clownReservation
+            applicationState.reservations = clownReservation
         }
     )
 }
 
-export const getRequests = () => {
-    return [...applicationState.requests]
+export const getReservations = () => {
+    return [...applicationState.reservations]
 }
 
 const mainContainer = document.querySelector("#container")
 
-export const sendRequest = (userClownReservation) => {
+export const sendReservation = (userClownReservation) => {
     const fetchOptions = {
         method: "POST",
         headers: {
@@ -28,15 +28,15 @@ export const sendRequest = (userClownReservation) => {
         body: JSON.stringify(userClownReservation)
     }
 
-    return fetch(`${API}/requests`, fetchOptions)
+    return fetch(`${API}/reservations`, fetchOptions)
     .then(response => response.json())
     .then(() => {
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
     })
 }
 
-export const deleteRequest = (id) => {
-    return fetch(`${API}/requests/${id}`, {method: "DELETE"})
+export const deleteReservation = (id) => {
+    return fetch(`${API}/reservations/${id}`, {method: "DELETE"})
     .then(
         () => {
             mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
